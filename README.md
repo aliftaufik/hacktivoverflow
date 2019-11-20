@@ -24,9 +24,9 @@ Status 201:
 
 ```json
 {
-	"username": YOUR_USERNAME,
-  "email": YOUR_EMAIL,
-  "password": YOUR_PASSWORD
+  "username": "dummy",
+  "email": "dummy@mail.com",
+  "password": "123456"
 }
 ```
 
@@ -51,9 +51,11 @@ Status 200:
 
 ```json
 {
-  "access_token": YOUR_ACCESS_TOKEN
+  "access_token": "very_long_combination_of_letters_numbers_and_other_characters"
 }
 ```
+
+
 
 ### Check Session
 
@@ -73,9 +75,10 @@ Status 200:
 
 ```json
 {
-  "id": YOUR_ID,
-  "username": YOUR_USERNAME,
-	"email": YOUR_EMAIL  
+  "id": "5dd4c311181e530d26f63776",
+  "username": "dummy",
+  "email": "dummy@mail.com",
+  "iat": 1574224733
 }
 ```
 
@@ -92,6 +95,28 @@ GET /user/questions
 ##### Header
 
 - access_token: String **Required**
+
+##### Return
+
+Status 200:
+
+```json
+[
+  {
+    "upvotes": [],
+    "downvotes": [],
+    "createdAt": "2019-11-20T04:17:04.238Z",
+    "updatedAt": "2019-11-20T04:17:04.238Z",
+    "_id": "5dd4be8476c0a007c66f3e3e",
+    "author": "5dd4b5e4c8d42601f50dbf90",
+    "title": "Need Help ASAP",
+    "desc": "I don't know what I don't know",
+    "__v": 0
+  }
+]
+```
+
+
 
 ### User Answers
 
@@ -148,12 +173,14 @@ Status 201:
 
 ```json
 {
-  "author": YOUR_USER_ID,
-  "title": QUESTION_TITLE,
-  "desc": QUESTION_DESCRIPTION
-  "createdAt": DATE_CREATED
+  "author": "5dd4c311181e530d26f63776",
+  "title": "Need Help ASAP",
+  "desc": "I don't know what I don't know",
+  "createdAt": "2019-11-20T04:36:19.306Z"
 }
 ```
+
+
 
 ### Edit Question
 
@@ -162,6 +189,41 @@ Status 201:
 ### Upvote Question
 
 ### Downvote Question
+
+### Post Answer
+
+##### Endpoint
+
+```http
+POST /questions/:id/answers
+```
+
+##### Header
+
+- access_token: String **Required**
+
+##### Param
+
+- id: String **Required**
+
+##### Body
+
+- answer: String **Required**
+
+##### Return
+
+Status 201:
+
+```json
+{
+  "questionId": "5dd4be8476c0a007c66f3e3e",
+  "author": "5dd4b5e4c8d42601f50dbf90",
+  "answer": "You should ask expert about this concern",
+  "createdAt": "2019-11-20T04:50:39.790Z"
+}
+```
+
+
 
 ### Upvote Answer
 
