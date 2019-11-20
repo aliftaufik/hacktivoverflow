@@ -135,7 +135,19 @@ GET /user/answers
 Status 200:
 
 ```json
-
+[
+  {
+    "upvotes": [],
+    "downvotes": [],
+    "createdAt": "2019-11-20T04:50:39.790Z",
+    "updatedAt": "2019-11-20T04:50:39.790Z",
+    "_id": "5dd4c72868bc510ea5892866",
+    "questionId": "5dd4be8476c0a007c66f3e3e",
+    "author": "5dd4b5e4c8d42601f50dbf90",
+    "answer": "You should ask expert about this concern",
+    "__v": 0
+  }
+]
 ```
 
 
@@ -148,6 +160,26 @@ Status 200:
 GET /questions
 ```
 
+##### Returns
+
+```json
+[
+  {
+    "upvotes": [],
+    "downvotes": [],
+    "createdAt": "2019-11-20T04:17:04.238Z",
+    "updatedAt": "2019-11-20T04:17:04.238Z",
+    "_id": "5dd4be8476c0a007c66f3e3e",
+    "author": "5dd4b5e4c8d42601f50dbf90",
+    "title": "Need Help ASAP",
+    "desc": "I don't know what I don't know",
+    "__v": 0
+  }
+]
+```
+
+
+
 ### One Question
 
 ##### Endpoint
@@ -159,6 +191,26 @@ GET /questions/:id
 ##### Param
 
 - id: String **Required**
+
+##### Return
+
+Status 200:
+
+```json
+{
+  "upvotes": [],
+  "downvotes": [],
+  "createdAt": "2019-11-20T04:17:04.238Z",
+  "updatedAt": "2019-11-20T04:17:04.238Z",
+  "_id": "5dd4be8476c0a007c66f3e3e",
+  "author": "5dd4b5e4c8d42601f50dbf90",
+  "title": "Need Help ASAP",
+  "desc": "I don't know what I don't know",
+  "__v": 0
+}
+```
+
+
 
 ### Post Question
 
@@ -194,7 +246,74 @@ Status 201:
 
 ### Edit Question
 
+##### Endpoint
+
+```http
+PUT /questions/:id
+```
+
+##### Header
+
+- access_token: String **Required**
+
+##### Param
+
+- id: String **Required**
+
+##### Body
+
+- title: String **Optional**
+- desc: String **Optional**
+
+##### Return
+
+Status 200:
+
+```json
+{
+  "upvotes": [],
+  "downvotes": [],
+  "createdAt": "2019-11-20T06:20:12.849Z",
+  "updatedAt": "2019-11-20T06:20:12.849Z",
+  "_id": "5dd4db229650b017ba61342c",
+  "author": "5dd4b5e4c8d42601f50dbf90",
+  "title": "Another Question",
+  "desc": "Another description",
+  "__v": 0
+}
+```
+
+
+
 ### Delete Question
+
+##### Endpoint
+
+```http
+DELETE /questions/:id
+```
+
+##### Header
+
+- access_token: String **Required**
+
+##### Param
+
+- id: String **Required**
+
+##### Return
+
+Status 200:
+
+```json
+{
+  "id": "5dd4db229650b017ba61342c",
+  "title": "Another Question",
+  "status": "deleted"
+}
+```
+
+
 
 ### Upvote Question
 
@@ -231,6 +350,26 @@ Status 201:
   "answer": "You should ask expert about this concern",
   "createdAt": "2019-11-20T04:50:39.790Z"
 }
+```
+
+### Question's Answers
+
+##### Endpoint
+
+```http
+GET /questions/:id/answers
+```
+
+##### Param
+
+- id: String **Required**
+
+##### Return
+
+Status 200:
+
+```
+
 ```
 
 

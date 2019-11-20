@@ -9,6 +9,7 @@ class QuestionController {
     })
       .then(question => {
         res.status(201).json({
+          id: question._id,
           author: question.author,
           title: question.title,
           desc: question.desc,
@@ -22,6 +23,53 @@ class QuestionController {
     Question.find({ author: req.payload.id })
       .then(questions => {
         res.status(200).json(questions)
+      })
+      .catch(next)
+  }
+
+  static getAllQuestions(req, res, next) {
+    Question.find({})
+      .then(questions => {
+        res.status(200).json(questions)
+      })
+      .catch(next)
+  }
+
+  static getOneQuestion(req, res, next) {
+    Question.findById(req.params.id)
+      .then(question => {
+        if (question) res.status(200).json(question)
+        else throw { status: 404, message: 'Question not found' }
+      })
+      .catch(next)
+  }
+
+  static updateQuestion(req, res, next) {
+    Question.findByIdAndUpdate(
+      req.params.id,
+      {
+        title: req.body.title || undefined,
+        desc: req.body.desc || undefined
+      },
+      { new: true, omitUndefined: true }
+    )
+      .then(question => {
+        if (question) res.status(200).json(question)
+        else throw { status: 404, message: 'Question not found' }
+      })
+      .catch(next)
+  }
+
+  static deleteQuestion(req, res, next) {
+    Question.findByIdAndRemove(req.params.id, { select: '_id title' })
+      .then(question => {
+        if (question) {
+          res.status(200).json({
+            id: question._id,
+            title: question.title,
+            status: 'deleted'
+          })
+        } else throw { status: 404, message: 'Question not found' }
       })
       .catch(next)
   }

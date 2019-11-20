@@ -1,4 +1,4 @@
-const { User } = require('../models')
+const { User, Question } = require('../models')
 const { decode } = require('../helpers/tokenHandler')
 
 module.exports = {
@@ -10,8 +10,13 @@ module.exports = {
     } catch (err) {
       next(err)
     }
+  },
+  authorize(req, res, next) {
+    Question.findById(req.params.id)
+      .then(question => {
+        if (question.author == req.payload.id) next()
+        else throw { status: 403, message: 'Unauthorized' }
+      })
+      .catch(next)
   }
-  // authorize(req, res, next) {
-
-  // }
 }
