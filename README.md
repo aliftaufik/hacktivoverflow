@@ -18,6 +18,18 @@ POST /user/signup
 - email: String **Required**
 - password: String **Required**
 
+##### Return
+
+Status 201:
+
+```json
+{
+	"username": YOUR_USERNAME,
+  "email": YOUR_EMAIL,
+  "password": YOUR_PASSWORD
+}
+```
+
 
 
 ### Sign In
@@ -35,9 +47,11 @@ POST /user/signin
 
 ##### Return
 
+Status 200:
+
 ```json
 {
-	"access_token": YOUR_ACCESS_TOKEN
+  "access_token": YOUR_ACCESS_TOKEN
 }
 ```
 
@@ -52,6 +66,20 @@ GET /user/checksession
 ##### Header
 
 - access_token: String **Required**
+
+##### Return
+
+Status 200:
+
+```json
+{
+  "id": YOUR_ID,
+  "username": YOUR_USERNAME,
+	"email": YOUR_EMAIL  
+}
+```
+
+
 
 ### User Questions
 
@@ -96,6 +124,36 @@ GET /questions/:id
 ##### Param
 
 - id: String **Required**
+
+### Post Question
+
+##### Endpoint
+
+```http
+POST /questions
+```
+
+##### Header
+
+- access_token: String **Required**
+
+##### Body
+
+- title: String **Required**
+- desc: String **Required**
+
+##### Return
+
+Status 201:
+
+```json
+{
+  "author": YOUR_USER_ID,
+  "title": QUESTION_TITLE,
+  "desc": QUESTION_DESCRIPTION
+  "createdAt": DATE_CREATED
+}
+```
 
 ### Edit Question
 

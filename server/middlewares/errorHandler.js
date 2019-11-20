@@ -1,5 +1,5 @@
 module.exports = (err, req, res, next) => {
-  console.log(err)
+  console.log(err.name)
 
   let status, message
   switch (err.name) {
@@ -9,6 +9,10 @@ module.exports = (err, req, res, next) => {
       for (const path of Object.keys(err.errors)) {
         message.push(err.errors[path].message)
       }
+      break
+    case 'JsonWebTokenError':
+      status = 401
+      message = 'access_token required'
       break
 
     default:
