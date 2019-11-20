@@ -1,5 +1,5 @@
 module.exports = (err, req, res, next) => {
-  console.log(err.name)
+  console.log(err)
 
   let status, message
   switch (err.name) {
@@ -10,6 +10,7 @@ module.exports = (err, req, res, next) => {
         message.push(err.errors[path].message)
       }
       break
+
     default:
       status = err.status || 500
       message = err.message || 'Internal server error'
