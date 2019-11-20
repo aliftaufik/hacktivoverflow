@@ -1,10 +1,13 @@
 const user = require('express').Router()
-const { UserController } = require('../controllers')
+const { UserController, QuestionController } = require('../controllers')
 const { authenticate } = require('../middlewares/auth')
 
 user.post('/signup', UserController.signUp)
 user.post('/signin', UserController.signIn)
 
-user.get('/checksession', authenticate, UserController.checkSession)
+user.use(authenticate)
+user.get('/checksession', UserController.checkSession)
+user.get('/questions', QuestionController.getUserQuestions)
+user.get('/answers')
 
 module.exports = user
