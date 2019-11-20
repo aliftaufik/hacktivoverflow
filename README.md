@@ -130,6 +130,16 @@ GET /user/answers
 
 - access_token: String **Required**
 
+##### Return
+
+Status 200:
+
+```json
+
+```
+
+
+
 ### All Questions
 
 ##### Endpoint

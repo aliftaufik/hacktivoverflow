@@ -17,6 +17,14 @@ class AnswerController {
       })
       .catch(next)
   }
+
+  static getUserAnswers(req, res, next) {
+    Answer.find({ author: req.payload.id })
+      .then(answers => {
+        res.status(200).json(answers)
+      })
+      .catch(next)
+  }
 }
 
 module.exports = AnswerController
