@@ -70,6 +70,42 @@ class QuestionController {
       })
       .catch(next)
   }
+
+  static upVoteHandler(req, res, next) {
+    Question.findById(req.params.id)
+      .then(question => {
+        if (!question) throw { status: 404, message: 'Question not found' }
+        if (question.upvotes.includes(req.payload.id)) {
+          question.upvotes.pull(req.payload.id)
+        } else {
+          question.upvotes.push(req.payload.id)
+        }
+        question.downvotes.pull(req.payload.id)
+        return question.save()
+      })
+      .then(question => {
+        res.status(200).json(question)
+      })
+      .catch(next)
+  }
+
+  static downVoteHandler(req, res, next) {
+    Question.findById(req.params.id)
+      .then(question => {
+        if (!question) throw { status: 404, message: 'Question not found' }
+        if (question.downvotes.includes(req.payload.id)) {
+          question.downvotes.pull(req.payload.id)
+        } else {
+          question.downvotes.push(req.payload.id)
+        }
+        question.upvotes.pull(req.payload.id)
+        return question.save()
+      })
+      .then(question => {
+        res.status(200).json(question)
+      })
+      .catch(next)
+  }
 }
 
 module.exports = QuestionController

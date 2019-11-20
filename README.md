@@ -317,7 +317,73 @@ Status 200:
 
 ### Upvote Question
 
+##### Endpoint
+
+```http
+PATCH /questions/:id/upvote
+```
+
+##### Header
+
+- access_token: String **Required**
+
+##### Param
+
+- id: String **Required**
+
+##### Return
+
+```json
+{
+  "upvotes": [
+    "5dd4b5e4c8d42601f50dbf90"
+  ],
+  "downvotes": [],
+  "_id": "5dd4fc3f8f01f827f79abe4f",
+  "author": "5dd4b5e4c8d42601f50dbf90",
+  "title": "Need Help ASAP",
+  "desc": "I don't know what I don't know",
+  "createdAt": "2019-11-20T08:41:35.789Z",
+  "updatedAt": "2019-11-20T08:44:09.883Z"
+}
+```
+
+
+
 ### Downvote Question
+
+##### Endpoint
+
+```http
+PATCH /questions/:id/downvote
+```
+
+##### Header
+
+- access_token: String **Required**
+
+##### Param
+
+- id: String **Required**
+
+##### Return
+
+```json
+{
+  "upvotes": [],
+  "downvotes": [
+    "5dd4b5e4c8d42601f50dbf90"
+  ],
+  "_id": "5dd4fc3f8f01f827f79abe4f",
+  "author": "5dd4b5e4c8d42601f50dbf90",
+  "title": "Need Help ASAP",
+  "desc": "I don't know what I don't know",
+  "createdAt": "2019-11-20T08:41:35.789Z",
+  "updatedAt": "2019-11-20T08:44:09.883Z"
+}
+```
+
+
 
 ### Post Answer
 
