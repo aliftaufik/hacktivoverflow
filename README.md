@@ -525,4 +525,69 @@ Status 200:
 
 ### Upvote Answer
 
+##### Endpoint
+
+```http
+PATCH /answers/:id/upvote
+```
+
+##### Header
+
+- access_token: String **Required**
+
+##### Param
+
+- id: String **Required**
+
+##### Return
+
+```json
+{
+  "upvotes": [
+    "5dd4c311181e530d26f63776"
+  ],
+  "downvotes": [],
+  "_id": "5dd4fe674bdfc92ae248c637",
+  "questionId": "5dd4be8476c0a007c66f3e3e",
+  "author": "5dd4b5e4c8d42601f50dbf90",
+  "answer": "You should ask expert about this concern",
+  "createdAt": "2019-11-20T08:50:47.030Z",
+  "updatedAt": "2019-11-20T08:51:18.987Z"
+}
+```
+
+
+
 ### Downvote Answer
+
+##### Endpoint
+
+```http
+PATCH /answers/:id/downvote
+```
+
+##### Header
+
+- access_token: String **Required**
+
+##### Param
+
+- id: String **Required**
+
+##### Return
+
+```json
+{
+  "upvotes": [],
+  "downvotes": [
+    "5dd4c311181e530d26f63776"
+  ],
+  "_id": "5dd4fe674bdfc92ae248c637",
+  "questionId": "5dd4be8476c0a007c66f3e3e",
+  "author": "5dd4b5e4c8d42601f50dbf90",
+  "answer": "You should ask expert about this concern",
+  "createdAt": "2019-11-20T08:50:47.030Z",
+  "updatedAt": "2019-11-20T08:51:18.987Z"
+}
+```
+

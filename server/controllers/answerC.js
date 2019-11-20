@@ -82,6 +82,42 @@ class AnswerController {
       })
       .catch(next)
   }
+
+  static upVoteHandler(req, res, next) {
+    Answer.findById(req.params.id)
+      .then(answer => {
+        if (!answer) throw { status: 404, message: 'Answer not found' }
+        if (answer.upvotes.includes(req.payload.id)) {
+          answer.upvotes.pull(req.payload.id)
+        } else {
+          answer.upvotes.push(req.payload.id)
+        }
+        answer.downvotes.pull(req.payload.id)
+        return answer.save()
+      })
+      .then(answer => {
+        res.status(200).json(answer)
+      })
+      .catch(next)
+  }
+
+  static downVoteHandler(req, res, next) {
+    Answer.findById(req.params.id)
+      .then(answer => {
+        if (!answer) throw { status: 404, message: 'Answer not found' }
+        if (answer.downvotes.includes(req.payload.id)) {
+          answer.downvotes.pull(req.payload.id)
+        } else {
+          answer.downvotes.push(req.payload.id)
+        }
+        answer.upvotes.pull(req.payload.id)
+        return answer.save()
+      })
+      .then(answer => {
+        res.status(200).json(answer)
+      })
+      .catch(next)
+  }
 }
 
 module.exports = AnswerController
