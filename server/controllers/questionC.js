@@ -54,8 +54,7 @@ class QuestionController {
       { new: true, omitUndefined: true }
     )
       .then(question => {
-        if (question) res.status(200).json(question)
-        else throw { status: 404, message: 'Question not found' }
+        res.status(200).json(question)
       })
       .catch(next)
   }
@@ -63,13 +62,11 @@ class QuestionController {
   static deleteQuestion(req, res, next) {
     Question.findByIdAndRemove(req.params.id, { select: '_id title' })
       .then(question => {
-        if (question) {
-          res.status(200).json({
-            id: question._id,
-            title: question.title,
-            status: 'deleted'
-          })
-        } else throw { status: 404, message: 'Question not found' }
+        res.status(200).json({
+          id: question._id,
+          title: question.title,
+          status: 'deleted'
+        })
       })
       .catch(next)
   }

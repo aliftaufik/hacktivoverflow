@@ -352,6 +352,8 @@ Status 201:
 }
 ```
 
+
+
 ### Question's Answers
 
 ##### Endpoint
@@ -368,8 +370,89 @@ GET /questions/:id/answers
 
 Status 200:
 
+```json
+[
+  {
+    "upvotes": [],
+    "downvotes": [],
+    "createdAt": "2019-11-20T04:50:39.790Z",
+    "updatedAt": "2019-11-20T04:50:39.790Z",
+    "_id": "5dd4c72868bc510ea5892866",
+    "questionId": "5dd4be8476c0a007c66f3e3e",
+    "author": "5dd4b5e4c8d42601f50dbf90",
+    "answer": "You should ask expert about this concern",
+    "__v": 0
+  }
+]
 ```
 
+
+
+### Edit Answer
+
+##### Endpoint
+
+```http
+PUT /answers/:id
+```
+
+##### Header
+
+- access_token: String **Required**
+
+##### Param
+
+- id: String **Required**
+
+##### Body
+
+- answer: String **Optional**
+
+##### Return
+
+Status 200:
+
+```json
+{
+  "upvotes": [],
+  "downvotes": [],
+  "_id": "5dd4c72868bc510ea5892866",
+  "createdAt": "2019-11-20T04:50:39.790Z",
+  "updatedAt": "2019-11-20T07:07:36.712Z",
+  "questionId": "5dd4be8476c0a007c66f3e3e",
+  "author": "5dd4b5e4c8d42601f50dbf90",
+  "answer": "Updated answer",
+  "__v": 0
+}
+```
+
+
+
+### Delete Answer
+
+##### Endpoint
+
+```http
+DELETE /answers/:id
+```
+
+##### Header
+
+- access_token: String **Required**
+
+##### Param
+
+- id: String **Required**
+
+##### Return
+
+Status 200:
+
+```json
+{
+  "id": "5dd4c72868bc510ea5892866",
+  "status": "deleted"
+}
 ```
 
 

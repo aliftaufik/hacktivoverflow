@@ -45,7 +45,43 @@ class AnswerController {
       .catch(next)
   }
 
-  
+  static getOneAnswer(req, res, next) {
+    Answer.findById(req.params.id)
+      .then(answer => {
+        if (answer) {
+          res.status(200).json(answer)
+        } else throw { status: 404, message: 'Answer not found' }
+      })
+      .catch(next)
+  }
+
+  static updateAnswer(req, res, next) {
+    Answer.findByIdAndUpdate(
+      req.params.id,
+      {
+        answer: req.body.answer
+      },
+      {
+        new: true,
+        omitUndefined: true
+      }
+    )
+      .then(answer => {
+        res.status(200).json(answer)
+      })
+      .catch(next)
+  }
+
+  static deleteAnswer(req, res, next) {
+    Answer.findByIdAndRemove(req.params.id, { select: '_id title' })
+      .then(question => {
+        res.status(200).json({
+          id: question._id,
+          status: 'deleted'
+        })
+      })
+      .catch(next)
+  }
 }
 
 module.exports = AnswerController
